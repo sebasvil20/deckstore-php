@@ -33,7 +33,6 @@
         if(isset($_GET['categoryId'])){
             $connection = connectToDatabase();
             $categoryId = mysqli_real_escape_string($connection, $_GET['categoryId']);
-            echo $categoryId;
             $getProductsQuery = "CALL get_products_by_categoryId($categoryId)";
             $categoryName = $connection -> query("CALL get_category_name($categoryId)");
             $connection -> close();
