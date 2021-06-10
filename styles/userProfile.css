@@ -1,0 +1,146 @@
+.section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.container,
+.right-container {
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  min-width: 430px;
+  align-items: center;
+}
+
+.container {
+  width: 40%;
+  text-align: center;
+  min-height: 400px;
+}
+
+.right-container {
+  width: 30%;
+  height: max-content;
+}
+
+.profileTitles span,
+.profileTitles span {
+  color: #333333;
+}
+
+.profileTitles,
+.profileTitles {
+  margin: 20px 0;
+}
+
+.logout {
+  border-radius: 20px;
+  border: 1px solid #f14242;
+  background-color: #ff4747;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.card-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.name-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #cfcfcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #e64141;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.title,
+.date {
+  padding: 0px 45px 0 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #212226;
+  min-width: 213px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.5s ease;
+}
+
+.title:hover {
+  color: #3783e7;
+}
+
+.date {
+  color: #919191;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.total {
+  color: #464646;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@media (max-width: 990px) {
+  .container h2 {
+    font-size: 20px;
+  }
+
+  .container h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 790px) {
+  .profileTitles {
+    font-size: 16px;
+  }
+
+  .h3Title {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 1490px) {
+  .title {
+    min-width: 185px;
+    font-size: 17px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .title,
+  .date {
+    padding: 0px 25px 0 20px;
+  }
+
+  .total {
+    font-size: 14px;
+  }
+}
