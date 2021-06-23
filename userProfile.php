@@ -1,15 +1,23 @@
 <?php
     require_once 'utils/connection.php';
 
+
+
+    //Verificaciones iniciales
     if(!isset($_SESSION)){
         session_start();
     }
 
+    //Si el usuario oprime el boton de cerrar sesión
+    //la sesión se destruye y se redirige a login.php
     if(isset($_POST['logout'])){
         session_destroy();
         header('Location: login.php');
     }
 
+    //Si la variable de sesion 'usuario' no está
+    //declarada, significa que el usuario no ha iniciado
+    //sesión, por lo tanto lo redirigimos al login.php
     if(!isset($_SESSION['User'])){
         header('Location: login.php');
     }
@@ -32,6 +40,12 @@
     ?>
     <div class="section">
         <div class="container">
+            
+            <!-- 
+                Obtenemos los datos del usuario de la variable de sesión usuario
+                Esta variable de sesión se inicializa cuando se inicia sesión
+             -->
+
             <img src="<?php echo $_SESSION['User']['gender'] == 0 ? "https://i.ibb.co/pLxVZz5/mavatar.png" : "https://i.ibb.co/PgZ7MRn/Avatar.png"?>" alt="">                
             <h2 class="profileTitles">Nombre: <span> <?php echo $_SESSION['User']['name'] ?> </span></h2>
             <h2 class="profileTitles">Email: <span><?php echo $_SESSION['User']['email'] ?></span></h2>
@@ -41,6 +55,7 @@
             </form>
         </div>
         <?php
+            //Obtenemos las ventas del usuario
             $idUSer = $_SESSION['User']['idUser'];
             $connection = connectToDatabase();
             $allSales = $connection -> query("CALL get_sales_from_user('$idUSer')");

@@ -19,6 +19,8 @@
         include 'controllers/signupController.php';
         include 'controllers/loginController.php';
 
+        // Validamos si el usuario ya inició sesión en la sesión actual
+        // de ser cierto, lo redirigimos a su perfil.
         if(isset($_SESSION['User'])){
             header('Location: userProfile.php');
         }

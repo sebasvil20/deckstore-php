@@ -1,10 +1,15 @@
 <?php
     require_once 'utils/connection.php';
 
+    //Verificaciones iniciales
     if(!isset($_SESSION)){
         session_start();
     }
 
+    //Para poder ver el dashboard principal, necesitamos que sea 
+    //administrador, por lo tanto, verificamos si 
+    //la variable de sesión esta inicializada o si el usuario es 
+    //administrador
     if(!isset($_SESSION['User']) || $_SESSION['User']['role'] != 1){
         header('Location: login.php');
     }
@@ -33,6 +38,9 @@
         <!-- Card para mostrar cantidad de ventas, total ventas, usuarios y cantidad de productos -->
         <div class="info-card-container">
             <?php 
+
+                // Obtenemos los datos de importancia de la base de datos (Ultimas ventas, total ventas, producto mas vendido, etc)
+
                 $connection = connectToDatabase();
                 $totalSales = mysqli_fetch_object($connection -> query("CALL get_total_sales()")) -> total;
                 $connection -> close();
@@ -48,6 +56,8 @@
                 $connection = connectToDatabase();
                 $totalUsers = mysqli_fetch_object($connection -> query("CALL get_total_users()")) -> totalUsers;
                 $connection -> close();
+
+                //Mostramos la información reutilizando el componente createInfoCard
 
                 createInfoCard(
                     $totalSales, 
@@ -106,6 +116,8 @@
         <h1 class="list-title">Lista de productos</h1>
         <?php
             include 'components/productCardDashboard.php';
+
+            //Listamos los productos
 
             $connection = connectToDatabase();
                 $productInfo = $connection -> query("CALL get_all_products()");

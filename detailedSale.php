@@ -27,8 +27,8 @@
     <?php 
         include_once 'components/header.php';
     ?>
-<!-- Obtener todos los productos get_sale_products_resume(idSale) -->
-<!-- Obtener datos de la compra get_sale_by_id(idSale, idUser)  -->
+    <!-- Obtener todos los productos get_sale_products_resume(idSale) -->
+    <!-- Obtener datos de la compra get_sale_by_id(idSale, idUser)  -->
     <div class="detailedCartContainer">
         
         <?php

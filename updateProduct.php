@@ -1,14 +1,22 @@
 <?php
     require_once 'utils/connection.php';
 
+    //Verificaciones iniciales
     if(!isset($_SESSION)){
         session_start();
     }
 
+    //Para poder actualizar un producto, necesitamos que sea 
+    //administrador, por lo tanto, verificamos si 
+    //la variable de sesión esta inicializada o si el usuario es 
+    //administrador
     if(!isset($_SESSION['User']) || $_SESSION['User']['role'] != 1){
         header('Location: login.php');
     }
 
+    //Para actualizar un producto estamos utilizando el metodo get
+    //el id=xxxxx debe estar presente en la url, caso contrario, se 
+    //devuelve al usuario al dashboard.
     if(!isset($_GET['id'])){
         header('Location: maindashboard.php');
     }
@@ -31,6 +39,9 @@
     <h1 class="product-section-title">Cambia los datos de tu producto</h1>
     <section class="form-container">
         <?php
+            
+            // Obtenemos la información del producto a actualizar, en caso de no existir, mostramos un mensaje de error
+
             $connection = connectToDatabase();
                 $productInfo = $connection -> query("CALL get_product_by_id(".$_GET['id'].")");
                 if($productInfo && $productInfo -> num_rows > 0){
@@ -111,6 +122,8 @@
                 }  
             if (isset($_POST['updateProduct'])){
                 $connection = connectToDatabase();
+
+                // Tomamos los datos de forma segura y guardamos el producto actualizado
                 
                 $idProduct = mysqli_real_escape_string($connection, $_POST['idProduct']);
                 $productName = mysqli_real_escape_string($connection, $_POST['productName']);
@@ -119,7 +132,15 @@
                 $productImg = mysqli_real_escape_string($connection, $_POST['productImg']);
                 $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
                 $selectedCategoryId = mysqli_real_escape_string($connection, $_POST['selectCategory']);
-                $updateProduct = "CALL update_product($idProduct, '$productName', '$productBrand', $productPrice, '$productImg', $quantity, $selectedCategoryId)";
+                $updateProduct = "CALL update_product(
+                                    $idProduct, 
+                                    '$productName', 
+                                    '$productBrand', 
+                                    $productPrice, 
+                                    '$productImg', 
+                                    $quantity, 
+                                    $selectedCategoryId
+                                )";
 
                 if($connection -> query($updateProduct)){
                     ?>

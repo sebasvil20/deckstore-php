@@ -2,10 +2,13 @@
     require_once 'utils/connection.php';
     require_once 'utils/removeProductFromCart.php';
 
+    //Validaciones iniciales
     if(!isset($_SESSION)){
         session_start();
     }
 
+    // Si el usuario elimina el producto del carrito, corremos la funcion
+    // removeProduct() que se encuentra en utils/removeProductFromCard
     if(isset($_POST['removeProduct'])){
         removeProduct();
     }
@@ -26,6 +29,8 @@
     <?php 
         include_once 'components/header.php';
         include_once 'components/productCard.php';
+        
+        //Obtenemos y listamos todos los productos, mostramos el nombre de la categoria, etc.
 
         $sectionTitle = "Todos los productos";
         $getProductsQuery = "CALL get_all_products()";
@@ -44,10 +49,16 @@
             }
         }
         
+        // Evento de añadir productos al carrito.
+        // Si no está inicializada la variablde de carrito, la inicializamos y guardamos el producto en el primer indice
+
         if(isset($_POST['addProductToCart'])){
             if(isset($_SESSION['cart'])){
                 $productID = $_POST['idProduct'];
                 $item_array_id = array_column($_SESSION['cart'], "idProduct");
+
+                // Verificamos que el item no esté en el carrito
+
                 if(!in_array($productID, $item_array_id)){
                     $item_array = array('idProduct' => $productID);
                     array_push($_SESSION['cart'], $item_array);

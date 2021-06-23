@@ -7,9 +7,13 @@
         $password = $_POST['password'];
         $verifyPassword = $_POST['verifyPassword'];
 
+        // Verificamos que tanto la contraseña con la confirmación sean las mismas
         if($verifyPassword == $password){
+
+            // Encriptamos la contraseña con la PASSWORD_SALT antes de entrar a la base de datos
             $encryptedPassword = sha1($password.PASSWORD_SALT);
             
+            // Verificamos que el usuario no exista
             $verifyUser = $connection -> query("CALL find_user_by_email('$email')");
             $connection -> close();
             if($verifyUser -> num_rows > 0){
@@ -24,6 +28,8 @@
                 <?php
             }
             else{
+
+                //Creamos el nuevo usuario y mostramos mensaje de confirmación
                 $connection = connectToDatabase();
                 $signupUser = $connection -> query("CALL create_new_user('$name', $gender, '$email', '$encryptedPassword', 0)");
                 $connection -> close();

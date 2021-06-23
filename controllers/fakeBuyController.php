@@ -4,7 +4,7 @@
     }
     if(isset($_POST['fakeBuy'])){
 
-        // TODO: Guardar nuevas compras e imprimir el resumen
+        // Guardar nuevas compras e imprimir el resumen
         // Este una vez (Recibe total y idUsuario, respectivamente. Devuelve el id de la compra)
         // add_new_sale
         // Este una vez por cada producto en el carrito (Recibe el id de la compra y el id del producto, respectivamente)

@@ -1,4 +1,6 @@
 <?php
+    //Variables globales
+    
     define("DB_HOST", 'localhost');
     define("DB_DATABASE", 'deckstore');
     define("DB_USERNAME", 'root');
